@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'proj_compras.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'compras',
+        'USER': 'postgres',
+        'PASSWORD': '258456',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
