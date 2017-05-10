@@ -9,6 +9,13 @@
                     {# Add Account Link #}
                 </h3>
                 {# Account Search Form #}
+                <form action="{% url 'proveedores:list' %}" method="get">
+                    <input id="al-search" type="text"
+                           name="proveedor" value="{{ request.GET.proveedor }}"
+                           class="form-control" />
+                    <input type="submit"
+                           value="Search" class="btn btn-success" />
+                </form>
             </div>
             {# List of Accounts #}
             <ul id="al-group" class="strip-list">

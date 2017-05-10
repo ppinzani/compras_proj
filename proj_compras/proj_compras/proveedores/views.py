@@ -14,6 +14,19 @@ class ProveedoresList(ListView):
     #This name can then be later used in templates.
     context_object_name = 'proveedores'
 
+    def get_queryset(self):
+        try:
+            a = self.request.GET.get('proveedor',)
+        except KeyError:
+            a = None
+        if a:
+            proveedores_list = Proveedor.objects.filter(
+                nombre_fiscal__icontains=a,
+            )
+        else:
+            proveedores_list = Proveedor.objects.all()
+        return proveedores_list
+
 '''
 El comportamiento por default es este
     def get_queryset(self):
