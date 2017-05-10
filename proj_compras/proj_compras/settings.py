@@ -74,7 +74,7 @@ ROOT_URLCONF = 'proj_compras.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(os.path.dirname(__file__), 'templates/'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,9 +82,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django.core.context_processors.i18n",  # Added
+                "django.core.context_processors.media",  # Added
+                "django.core.context_processors.static",  # Added
+                "django.core.context_processors.tz",  # Added
             ],
+            'debug': DEBUG,
         },
-        'TEMPLATE_DEBUG': DEBUG,
     },
 ]
 
