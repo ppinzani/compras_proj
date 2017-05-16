@@ -33,7 +33,7 @@ class Proveedor(models.Model):
     uuid = ShortUUIDField(unique=True)
     nombre_fiscal = models.CharField(max_length=100)
     nombre_fantasia = models.CharField(max_length=100, blank=True)
-    fecha_alta = models.DateField(default=now(), blank=True)
+    fecha_alta = models.DateField(default=now, blank=True)
     cuit = models.CharField(max_length=25, blank=True)
     margen_ganancia = models.SmallIntegerField(blank=True, null=True)
     condicion_iva = models.CharField(max_length=5,
