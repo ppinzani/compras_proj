@@ -15,7 +15,6 @@ Including another URLconf
 from django.conf.urls import patterns,include, url
 from django.contrib import admin
 
-#from proveedores.views import ProveedoresList
 
 admin.autodiscover()
 
@@ -28,10 +27,6 @@ urlpatterns = patterns('',
             include('proj_compras.proveedores.urls', namespace='proveedores')
             ),
 
-        #url(regex=r'proveedores/^$',
-        #    view=ProveedoresList.as_view(),
-        #    name='proveedores_list'
-        #    ),
 
 )
 
