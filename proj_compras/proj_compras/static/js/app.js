@@ -54,6 +54,11 @@ function resetForm($form) {
 // Main App
 $(document).ready(function() {
 
-
+    // Proveedor - Use AJAX to get the Proveedor Edit form and
+    // display it on the page w/out a refresh
+    $('#gi-container').delegate('.editar-proveedor', 'click', function(e) {
+        e.preventDefault();
+        $('#gi-container').load($(this).attr('href'));
+    });
 
 });

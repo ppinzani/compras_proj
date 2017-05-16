@@ -7,9 +7,13 @@
             <div id="al-control">
                 <h3 class="ad-mh">Proveedores
                     {# Add Account Link #}
+                    <span class="pull-right">
+                        <a href="{% url 'proveedores:nuevo' %}"
+                           class="btn btn-link p-r-none">+ Nuevo Proveedor</a>
+                    </span>
                 </h3>
                 {# Account Search Form #}
-                <form action="{% url 'proveedores:list' %}" method="get">
+                <form action="{% url 'proveedores:lista' %}" method="get">
                     <input id="al-search" type="text"
                            name="proveedor" value="{{ request.GET.proveedor }}"
                            class="form-control" />
@@ -21,7 +25,7 @@
             <ul id="al-group" class="strip-list">
                 {% for proveedor in proveedores %}
                     <li class="al-item">
-                        <a href=""><h4 class="al-name">{{ proveedor.nombre_fiscal }}</h4></a>
+                        <a href="{{ proveedor.get_absolute_url }}"><h4 class="al-name">{{ proveedor.nombre_fiscal }} </h4></a>
                         <span class="al-created">fecha alta {{ proveedor.fecha_alta }}</span>
                     </li>
                 {% endfor %}
@@ -32,13 +36,13 @@
                     <ul class="strip-list al-pgnt-list">
                         {% if page_obj.has_previous %}
                             <li class="pull-left">
-                                <a href="{% url 'proveedores:list' %}?page={{ page_obj.previous_page_number }}
+                                <a href="{% url 'proveedores:lista' %}?page={{ page_obj.previous_page_number }}
                                 {% if request.GET.proveedor %}&proveedor={{ request.GET.proveedor }}{% endif %}">Prev</a>
                             </li>
                         {% endif %}
                         {% if page_obj.has_next %}
                             <li class="pull-right">
-                                <a href="{% url 'proveedores:list' %}?page={{ page_obj.next_page_number }}
+                                <a href="{% url 'proveedores:lista' %}?page={{ page_obj.next_page_number }}
                                 {% if request.GET.proveedor %}&proveedor={{ request.GET.proveedor }}{% endif %}">Next</a>
                             </li>
                         {% endif %}
