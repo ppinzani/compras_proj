@@ -21,8 +21,13 @@ class Proveedor(models.Model):
     class Meta:
         verbose_name_plural = 'proveedores'
 
+    def display_name(self):
+        if self.nombre_fantasia:
+            return self.nombre_fantasia
+        return self.nombre_fiscal
+
     def __unicode__(self):
-        return u"%s" % self.nombre_fiscal
+        return u"%s" % self.display_name
 
     @models.permalink
     def get_absolute_url(self):
@@ -35,19 +40,3 @@ class Proveedor(models.Model):
     @models.permalink
     def get_delete_url(self):
         return 'proveedores:borrar', [self.uuid]
-
-
-class ContactoProveedor(models.Model):
-    proveedor = models.ForeignKey(Proveedor,
-                                  on_delete=models.CASCADE,
-                                  blank=True,
-                                  null=True
-                                  )
-    nombre = models.CharField(max_length=80)
-    email = models.EmailField(blank=True)
-    telefono_1 = models.CharField(max_length=40, blank=True)
-    telefono_2 = models.CharField(max_length=40, blank=True)
-    direccion_1 = models.CharField(max_length=80, blank=True)
-    direccion_2 = models.CharField(max_length=80, blank=True)
-    pagina_web = models.URLField(blank=True)
-    detalles = models.TextField(blank=True)

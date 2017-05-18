@@ -25,7 +25,7 @@
             <ul id="al-group" class="strip-list">
                 {% for proveedor in proveedores %}
                     <li class="al-item">
-                        <a href="{{ proveedor.get_absolute_url }}"><h4 class="al-name">{{ proveedor.nombre_fiscal }} </h4></a>
+                        <a href="{{ proveedor.get_absolute_url }}"><h4 class="al-name">{{ proveedor.display_name }} </h4></a>
                         <span class="al-created">fecha alta {{ proveedor.fecha_alta }}</span>
                     </li>
                 {% endfor %}

@@ -55,7 +55,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'proj_compras.proveedores'
+    'proj_compras.proveedores',
+    'proj_compras.contactos'
 )
 
 MIDDLEWARE_CLASSES = (

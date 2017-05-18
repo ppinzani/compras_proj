@@ -1,0 +1,17 @@
+<tr>
+    <td class="ci-td-p-l">{{ contacto.nombre }}</td>
+    <td>{{ contacto.telefono }}</td>
+    <td>{{ contacto.email }}</td>
+    <td>{{ contacto.direccion }}</td>
+    <td>{{ contacto.direccion_web }}</td>
+    <td class="con-cntrl">
+        {# Contact Edit Link #}
+        <a class="pen editar-contacto"
+           href="{{ contacto.get_update_url }}?proveedor={{ proveedor.id }}"></a>
+    </td>
+    <td class="ci-td-p-r">
+        {# Contact Delete Link #}
+        <a class="cancel"
+           href="{{ contacto.get_delete_url }}?proveedor={{ proveedor.id }}"></a>
+    </td>
+</tr>

@@ -4,10 +4,11 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 
 from .models import Proveedor
-from .models import ContactoProveedor
+from proj_compras.contactos.models import Contacto
 from .forms import ProveedorForm
 
 
@@ -27,7 +28,8 @@ class ProveedoresList(ListView):
             a = None
         if a:
             proveedores_list = Proveedor.objects.filter(
-                nombre_fiscal__icontains=a,
+                Q(nombre_fiscal__icontains=a) |
+                Q(nombre_fantasia__icontains=a)
             )
         else:
             proveedores_list = Proveedor.objects.all()
@@ -50,11 +52,11 @@ def detalle_proveedor(request, uuid):
     #The uuid object is passed to the view via the URL configuration
     proveedor = Proveedor.objects.get(uuid=uuid)
 
-    #contactos = ContactoProveedor.objects.filter(proveedor=proveedor)
+    contactos = Contacto.objects.filter(proveedor=proveedor)
 
     variables = {
         'proveedor': proveedor,
-        #'contactos': contactos
+        'contactos': contactos
     }
 
     return render(request, 'proveedores/detalle_proveedor.html', variables)
@@ -73,9 +75,6 @@ def proveedor_cru(request, uuid=None):
     if request.POST:
         form = ProveedorForm(request.POST, instance=proveedor)
         if form.is_valid():
-            form.save(commit=False)
-            if not form['nombre_fantasia']:
-                form['nombre_fantasia'] = form['nombre_fiscal']
             form.save()
             redirect_url = reverse(
                 'proveedores:detalle',
