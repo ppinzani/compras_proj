@@ -1,5 +1,5 @@
 <div class="gi-header">
-    <h3 class="ad-mh">{{ proveedor.nombre_fantasia }}
+    <h3 class="ad-mh">{{ proveedor.display_name }}
         {# Account Edit Link #}
         <span>
             <a class="ad-control editar-proveedor btn btn-link"
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-3">
         <h5 class="gi-sh">Condicion</h5>
-        <p>{{ proveedor.condicion_iva }}</p>
+        <p>{{ proveedor.get_condicion_iva_display }}</p>
     </div>
     <div class="col-md-3">
         <h5 class="gi-sh">Fecha De Alta</h5>
