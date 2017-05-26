@@ -6,12 +6,16 @@
     <td>{{ contacto.direccion_web }}</td>
     <td class="con-cntrl">
         {# Contact Edit Link #}
+        {% if perms.contactos.can_edit %}
         <a class="pen editar-contacto"
            href="{{ contacto.get_update_url }}?proveedor={{ proveedor.id }}"></a>
+        {% endif %}
     </td>
     <td class="ci-td-p-r">
         {# Contact Delete Link #}
+        {% if perms.contactos.can_delete %}
         <a class="cancel"
            href="{{ contacto.get_delete_url }}?proveedor={{ proveedor.id }}"></a>
+        {% endif %}
     </td>
 </tr>

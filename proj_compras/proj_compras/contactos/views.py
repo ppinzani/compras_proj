@@ -1,16 +1,17 @@
 from django.shortcuts import render
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect,  HttpResponseForbidden, Http404
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import DeleteView
+from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
 from .models import Contacto
 from .forms import ContactoForm
 from proj_compras.proveedores.models import Proveedor
 
 
-#@login_required()
+@login_required()
 def detalle_contacto(request, uuid):
 
     contacto = Contacto.objects.get(uuid=uuid)
@@ -24,25 +25,24 @@ def detalle_contacto(request, uuid):
     return render(request, template, variables)
 
 
-#@login_required()
+@login_required()
 def contacto_cru(request, uuid=None, proveedor=None):
 
     if uuid:  # Si hay uuid estoy editando
+        if not request.user.has_perm('contactos.can_edit'):
+                    return HttpResponseForbidden()
         contacto = get_object_or_404(Contacto, uuid=uuid)
-        #if contacto.owner != request.user:
-        #    return HttpResponseForbidden()
     else:
+        if not request.user.has_perm('contactos.can_edit'):
+            return HttpResponseForbidden()
         contacto = Contacto()
 
     if request.POST:
         form = ContactoForm(request.POST, instance=contacto)
         if form.is_valid():
             proveedor = form.cleaned_data['proveedor']
-            #if account.owner != request.user:
-            #    return HttpResponseForbidden()
             # save the data
             contacto = form.save()
-
             if request.is_ajax():
                 return render(request,
                               'contactos/item_contacto.html',
@@ -86,18 +86,17 @@ class ContactoMixin(object):
         kwargs.update({'object_name': 'Contacto'})
         return kwargs
 
-    # @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ContactoMixin, self).dispatch(*args, **kwargs)
 
 
-class BorrarContacto(ContactoMixin, DeleteView):
+class BorrarContacto(LoginRequiredMixin, PermissionRequiredMixin, ContactoMixin, DeleteView):
     template_name = 'confirmar_objeto_eliminado.html'
+    permission_required = 'contactos.can_delete'
+    raise_exception = True
 
     def get_object(self, queryset=None):
         obj = super(BorrarContacto, self).get_object()
-        #if not obj.owner == self.request.user:
-        #    raise Http404
         proveedor = Proveedor.objects.get(id=obj.proveedor.id)
         self.proveedor = proveedor
         return obj

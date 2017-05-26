@@ -22,7 +22,9 @@
                     </tbody>
                 </table>
                 {# Link a nuevo contacto #}
-                <a id="nuevo-contacto" class="btn btn-link" href="{% url 'contactos:nuevo' %}?proveedor={{ proveedor.id }}">Nuevo Contacto</a>
+                {% if perms.contactos.can_add %}
+                    <a id="nuevo-contacto" class="btn btn-link" href="{% url 'contactos:nuevo' %}?proveedor={{ proveedor.id }}">Nuevo Contacto</a>
+                {% endif %}
             </div>
         </div>
     </div>

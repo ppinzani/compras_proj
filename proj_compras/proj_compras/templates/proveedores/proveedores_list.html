@@ -7,10 +7,12 @@
             <div id="al-control">
                 <h3 class="ad-mh">Proveedores
                     {# Add Account Link #}
+                    {% if perms.proveedores.can_add %}
                     <span class="pull-right">
                         <a href="{% url 'proveedores:nuevo' %}"
                            class="btn btn-link p-r-none">+ Nuevo Proveedor</a>
                     </span>
+                    {% endif %}
                 </h3>
                 {# Account Search Form #}
                 <form action="{% url 'proveedores:lista' %}" method="get">

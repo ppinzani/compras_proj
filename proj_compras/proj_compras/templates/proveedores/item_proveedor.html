@@ -1,10 +1,12 @@
 <div class="gi-header">
     <h3 class="ad-mh">{{ proveedor.display_name }}
         {# Account Edit Link #}
-        <span>
-            <a class="ad-control editar-proveedor btn btn-link"
-               href="{{ proveedor.get_update_url }}">Editar</a>
-        </span>
+        {% if perms.proveedores.can_edit %}
+            <span>
+                <a class="ad-control editar-proveedor btn btn-link"
+                   href="{{ proveedor.get_update_url }}">Editar</a>
+            </span>
+        {% endif %}
     </h3>
 
 </div>

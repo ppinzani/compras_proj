@@ -1,10 +1,11 @@
 from django.views.generic import ListView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from braces.views import LoginRequiredMixin
 
 
 from .models import Proveedor
@@ -13,13 +14,14 @@ from .forms import ProveedorForm
 
 
 # Create your views here.
-class ProveedoresList(ListView):
+class ProveedoresList(LoginRequiredMixin, ListView):
     model = Proveedor
     paginate_by = 12  # Para agregar paginacion
     template_name = 'proveedores/proveedores_list.html'
     #This setting gives the queried data a helpful name.
     #This name can then be later used in templates.
     context_object_name = 'proveedores'
+    redirect_field_name = '/login/'
 
     def get_queryset(self):
         try:
@@ -42,12 +44,8 @@ El comportamiento por default es este
         return proveedores_list
 '''
 
-#    @method_decorator(login_required) No lo uso por ahora
-#       def dispatch(self, *args, **kwargs):
-#       return super(ProveedoresList, self).dispatch(*args, **kwargs)
 
-
-#@login_required()
+@login_required()
 def detalle_proveedor(request, uuid):
     #The uuid object is passed to the view via the URL configuration
     proveedor = Proveedor.objects.get(uuid=uuid)
@@ -62,14 +60,16 @@ def detalle_proveedor(request, uuid):
     return render(request, 'proveedores/detalle_proveedor.html', variables)
 
 
-#@login_required()
+@login_required()
 def proveedor_cru(request, uuid=None):
 
     if uuid:
+        if not request.user.has_perm('proveedores.can_edit'):
+            return HttpResponseForbidden()
         proveedor = get_object_or_404(Proveedor, uuid=uuid)
-        #if account.owner != request.user:
-        #    return HttpResponseForbidden()
     else:
+        if not request.user.has_perm('proveedores.can_add'):
+            return HttpResponseForbidden()
         proveedor = Proveedor()
 
     if request.POST:

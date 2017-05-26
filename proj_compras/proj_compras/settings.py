@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'proj_compras.proveedores',
     'proj_compras.contactos',
+    'mercaderias',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -133,3 +134,6 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+LOGIN_REDIRECT_URL = '/proveedores/'
+LOGIN_URL = '/login/'
