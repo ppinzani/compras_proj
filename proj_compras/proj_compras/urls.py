@@ -34,10 +34,10 @@ urlpatterns = patterns(
     ),
 
     url(r'^proveedores/',
-        include('proj_compras.proveedores.urls', namespace='proveedores')
+        include('proveedores.urls', namespace='proveedores')
         ),
 
     url(r'^contactos/',
-        include('proj_compras.contactos.urls', namespace='contactos')
+        include('contactos.urls', namespace='contactos')
         ),
 )

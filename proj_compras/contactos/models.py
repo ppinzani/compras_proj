@@ -2,7 +2,7 @@ from django.db import models
 
 from shortuuidfield import ShortUUIDField
 
-from proj_compras.proveedores.models import Proveedor
+from proveedores.models import Proveedor
 
 
 # Create your models here.

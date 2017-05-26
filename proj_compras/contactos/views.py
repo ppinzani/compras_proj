@@ -8,7 +8,7 @@ from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
 from .models import Contacto
 from .forms import ContactoForm
-from proj_compras.proveedores.models import Proveedor
+from proveedores.models import Proveedor
 
 
 @login_required()

@@ -9,7 +9,7 @@ from braces.views import LoginRequiredMixin
 
 
 from .models import Proveedor
-from proj_compras.contactos.models import Contacto
+from contactos.models import Contacto
 from .forms import ProveedorForm
 
 
