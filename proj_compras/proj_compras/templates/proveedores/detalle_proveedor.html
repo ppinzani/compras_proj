@@ -1,32 +1,93 @@
-{% extends 'base.html' %}
 
+{% extends "proveedores/base_proveedores_lista.html" %}
+{% block title %}Proveedores{% endblock title %}
 {% block content %}
-    <div id="content-container" class="container p-none">
-        <div id="ad-container">
-            <div id="gi-container" class="ad-container">
-                {% include 'proveedores/item_proveedor.html' %}
-            </div>
-        </div>
-        {# Listar Contactos #}
-        <div id="cd-container" class="ad-container">
-            <div class="ad-headers">
-                <h4 class="ad-mh m-none">Contactos</h4>
-            </div>
-            <div id="cd-body" class="row">
-                <table id="cd-table" class="table table-hover">
-                    <tbody>
-                        <tr></tr>
-                        {% for contacto in contactos %}
-                            {% include 'contactos/item_contacto.html' %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {# Link a nuevo contacto #}
-                {% if perms.contactos.can_add %}
-                    <a id="nuevo-contacto" class="btn btn-link" href="{% url 'contactos:nuevo' %}?proveedor={{ proveedor.id }}">Nuevo Contacto</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+{% include "nav.html" %}
+{% block producto %}
+<div class="wrapper">
+      <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+        <!-- Main content -->
+    <section class="content">
+      <!-- START ALERTS AND CALLOUTS -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
 
-{% endblock %}
+            <div class="box-header with-border">
+                <a href="{% url 'proveedores:lista' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+                    <div class="box-tools pull-right">
+                      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div><!-- /.box-tools -->
+            </div><!-- /.box-header -->
+              <div class="box-body">
+                  <table class="table table-striped table table-hover ">
+                        <tbody>
+                              <tr class="success">
+                                  <td><strong>Nombre Fiscal:</strong></td>
+                                  <td>{{ proveedor.nombre_fiscal }}</td>
+                              </tr>
+                              <tr class="success">
+                                  <td><strong>Nombre de Fantasía:</strong></td>
+                                  <td>{{ proveedor.nombre_fantasia }} </td>
+                               </tr>
+                               <tr class="success">
+                                  <td><strong>CUIT:</strong></td>
+                                  <td>{{ proveedor.cuit }}</td>
+                               </tr>
+                                                           <tr class="success">
+                                  <td><strong>Condicion IVA:</strong></td>
+                                  <td>{{ proveedor.get_condicion_iva_display }}</td>
+                               </tr>
+                               <tr class="success">
+                                  <td><strong>Fecha de Alta:</strong> </td>
+                                  <td>{{ proveedor.fecha_alta}}</td>
+                               </tr>
+                        </tbody>
+                    </table>
+
+              </div><!-- /.box -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+        <div id="cd-container" class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                     <div class="box-header with-border">
+                        <h2 class="page-header"> Contactos </h2>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div><!-- /.box-tools -->
+                    </div><!-- /.box-header -->
+                    <div id="cd-body" class="box-body">
+                        {% if perms.contactos.can_add %}
+                        <a href="{% url 'contactos:nuevo' %}?proveedor={{ proveedor.id }}" id="nuevo-contacto" class="btn btn-success"> <span class="glyphicon glyphicon-chevron"></span> Nuevo Contacto</a>
+                        {% endif %}
+                        <table id="cd-table" class="table table-responsive table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th> Nombre </th>
+                                    <th> Teléfono </th>
+                                    <th> Email </th>
+                                    <th> Direccion </th>
+                                    <th> Web </th>
+                                    <th> Acciones </th>
+                                </tr>
+                                {% for contacto in contactos %}
+                                    {% include 'contactos/item_contacto.html' %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- box -->
+            </div> <!-- col -->
+        </div> <!-- row -->
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+
+{% include "footer.html" %}
+{% endblock producto %}
+{% endblock content %}
+
+

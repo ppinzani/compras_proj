@@ -1,11 +1,11 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from braces.views import LoginRequiredMixin
+from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
 
 from .models import Proveedor
@@ -16,33 +16,10 @@ from .forms import ProveedorForm
 # Create your views here.
 class ProveedoresList(LoginRequiredMixin, ListView):
     model = Proveedor
-    paginate_by = 12  # Para agregar paginacion
-    template_name = 'proveedores/proveedores_list.html'
-    #This setting gives the queried data a helpful name.
+    template_name = 'proveedores/proveedores_lista.html'
     #This name can then be later used in templates.
     context_object_name = 'proveedores'
     redirect_field_name = '/login/'
-
-    def get_queryset(self):
-        try:
-            a = self.request.GET.get('proveedor',)
-        except KeyError:
-            a = None
-        if a:
-            proveedores_list = Proveedor.objects.filter(
-                Q(nombre_fiscal__icontains=a) |
-                Q(nombre_fantasia__icontains=a)
-            )
-        else:
-            proveedores_list = Proveedor.objects.all()
-        return proveedores_list
-
-'''
-El comportamiento por default es este
-    def get_queryset(self):
-        proveedores_list = Proveedor.objects.all()
-        return proveedores_list
-'''
 
 
 @login_required()
@@ -89,9 +66,15 @@ def proveedor_cru(request, uuid=None):
         'proveedor': proveedor,
     }
 
-    if request.is_ajax():
-        template = 'proveedores/item_proveedor_form.html'
-    else:
-        template = 'proveedores/proveedor_cru.html'
+    template = 'proveedores/proveedores_create_update.html'
 
     return render(request, template, variables)
+
+
+
+class BorrarProveedor(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Proveedor
+    template_name = 'proveedores/eliminar_proveedor.html'
+    permission_required = 'proveedores.can_delete'
+    raise_exception = True
+    success_url = '/proveedores/'

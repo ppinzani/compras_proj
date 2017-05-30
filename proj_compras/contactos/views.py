@@ -91,7 +91,7 @@ class ContactoMixin(object):
 
 
 class BorrarContacto(LoginRequiredMixin, PermissionRequiredMixin, ContactoMixin, DeleteView):
-    template_name = 'confirmar_objeto_eliminado.html'
+    template_name = 'contactos/eliminar_contacto.html'
     permission_required = 'contactos.can_delete'
     raise_exception = True
 

@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'proveedores',
     'contactos',
     'mercaderias',
+    'usuarios',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -136,4 +137,4 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/proveedores/'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/'

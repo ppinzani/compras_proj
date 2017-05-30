@@ -24,14 +24,19 @@ urlpatterns = patterns(
 
     url(r'^admin/', include(admin.site.urls)),
 
-    # Login/Logout URLs
-    (r'^login/$',
-        'django.contrib.auth.views.login', {'template_name': 'login.html'}
-    ),
+    #login-users
+    url(r'^',
+        include('usuarios.urls',  namespace='usuarios')
+        ),
 
-    (r'^logout/$',
-        'django.contrib.auth.views.logout', {'next_page': '/login/'}
-    ),
+    # Login/Logout URLs
+    #(r'^login/$',
+    #    'django.contrib.auth.views.login', {'template_name': 'login.html'}
+    #),
+
+    #(r'^logout/$',
+    #    'django.contrib.auth.views.logout', {'next_page': '/login/'}
+    #),
 
     url(r'^proveedores/',
         include('proveedores.urls', namespace='proveedores')

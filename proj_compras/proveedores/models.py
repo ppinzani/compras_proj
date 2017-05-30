@@ -39,4 +39,4 @@ class Proveedor(models.Model):
 
     @models.permalink
     def get_delete_url(self):
-        return 'proveedores:borrar', [self.uuid]
+        return 'proveedores:borrar', [self.id]

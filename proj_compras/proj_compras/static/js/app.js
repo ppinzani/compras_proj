@@ -73,7 +73,7 @@ $(document).ready(function() {
 
 
     // Contact - Use AJAX to get the Contact Edit form
-    $('#cd-container').delegate('.editar-contacto', 'click', function(e) {
+    $('#cd-container').delegate('#editar-contacto', 'click', function(e) {
         e.preventDefault();
         var that = $(this);
         $.get($(this).attr('href'), function(data) {
@@ -102,8 +102,5 @@ $(document).ready(function() {
         });
         $(this).remove(); // Remove the form
     });
-
-
-
 
 });

@@ -1,0 +1,103 @@
+{% extends "proveedores/base_proveedores_lista.html" %}
+{% block title %}Proveedores{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+{% block producto %}
+<div class="wrapper">
+      <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+         <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Proveedores
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
+            <li><a href="{% url 'proveedores:lista' %}">Proveedores</a></li>
+            <li class="active">Nuevo/Editar Proveedor</li>
+          </ol>
+        </section>
+        <!-- Main content -->
+    <section class="content">
+      <!-- START ALERTS AND CALLOUTS -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+
+              <a href="{% url 'proveedores:lista' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+              </a>
+
+              <div class="box-tools pull-right">
+                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div><!-- /.box-tools -->
+
+            </div><!-- /.box-header -->
+              <div class="box-body">
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <form class="form-horizontal" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="form-group has-success has-feedback  {% if form.nombre_fiscal.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ form.nombre_fiscal.label_tag }}</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="nombre_fiscal" class="form-control" value='{% if form.nombre_fiscal.value %}{{ form.nombre_fiscal.value }}{% endif %}' data-toggle="tooltip" data-placement="top" title='{{ form.nombre_fiscal.errors.as_text}}' autofocus='true' id="disabledInput" type="text" >
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group has-success has-feedback  {% if form.nombre_fantasia.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ form.nombre_fantasia.label_tag }}</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="disabledTextInput" name="nombre_fantasia" class="form-control" value='{% if form.nombre_fantasia.value %}{{ form.nombre_fantasia.value }}{% endif %}' data-toggle="tooltip" data-placement="top" title='{{ form.nombre_fantasia.errors.as_text}}' autofocus='true'>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group has-success has-feedback  {% if form.cuit.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ form.cuit.label_tag }}</label>
+                                         <div class="col-sm-6">
+                                            <input type="text" id="disabledTextInput" name="cuit" class="form-control" value='{% if form.cuit.value %}{{ form.cuit.value }}{% endif %}' data-toggle="tooltip" data-placement="top" title='{{ form.cuit.errors.as_text}}' autofocus='true'>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group has-success has-feedback  {% if form.condicion_iva.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ form.condicion_iva.label_tag }}</label>
+                                        <div class="col-sm-6">
+                                            {{ form.condicion_iva }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success has-feedback  {% if form.fecha_alta.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ form.fecha_alta.label_tag }}</label>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                          <div class="input-group-addon">
+                                              <i class="fa fa-calendar"></i>
+                                          </div>
+                                          {{ form.fecha_alta }}
+                                      </div>
+                                        </div>
+                                       </div>
+                                </div>
+                            </div> <!--<div class="row"> -->
+                                <div class="panel-footer color-footer">
+                                    <button type="submit" class="btn btn-primary">
+                                                 Grabar
+                                    </button>
+                                </div>
+                        </form>
+                      </div>
+                    </div><!--/.row-->
+            </div><!-- /.box body -->
+          </div><!-- /.box info -->
+          </div><!--col-->
+        </div><!-- /.row -->
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+{% include "footer.html" %}
+ {% endblock producto %}
+{% endblock content %}

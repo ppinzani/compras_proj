@@ -19,6 +19,10 @@ urlpatterns = [
         name='editar'
         ),
 
+    url(regex=r'^(?P<pk>[\w-]+)/borrar/$',
+        view=views.BorrarProveedor.as_view(),
+        name='borrar'
+        ),
 
     url(regex=r'^(?P<uuid>[\w-]+)/$',
         view=views.detalle_proveedor,

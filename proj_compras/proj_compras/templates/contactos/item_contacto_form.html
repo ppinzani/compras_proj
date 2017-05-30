@@ -10,8 +10,8 @@
         <tbody>
             <tr>
                 <td class="p-l-none">{{ form.nombre }}</td>
-                <td>{{ form.email }}</td>
                 <td>{{ form.telefono }}</td>
+                <td>{{ form.email }}</td>
                 <td>{{ form.direccion }}</td>
                 <td class="p-r-none">{{ form.pagina_web }}</td>
             </tr>
@@ -30,5 +30,5 @@
            type="hidden"
            value="{% if request.GET.proveedor %}
            {{ request.GET.proveedor }}{% else %}{{ proveedor.id }}{% endif %}"/>
-    <input id="contact-submit" class="btn btn-primary m-r-none" type="submit" value="GUARDAR"/>
+    <input id="contact-submit" class="btn btn-block btn-success" type="submit" value="GUARDAR"/>
 </form>
