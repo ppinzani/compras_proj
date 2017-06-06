@@ -5,7 +5,7 @@
         <!-- Logo -->
         <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini">Proyecto</span>
+          <span class="logo-mini">Proy</span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">Proyecto</span>
         </a>
@@ -83,6 +83,16 @@
                 {% if perms.proveedores.can_add %}
                 <li><a href="{% url 'proveedores:nuevo' %}"><i class="fa fa-save"></i><small class="label pull-right bg-green">Nuevo</small>Nuevo</a></li>
                 {% endif %}
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-tag"></i> <span>Mercaderias</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="{% url 'mercaderias:lista' %}"><i class="fa fa-check-square"></i> Lista</a></li>
+                <li class="active"><a href="{% url 'mercaderias:lista_categorias' %}"><i class="fa fa-tags"></i> Categorias</a></li>
               </ul>
             </li>
 

@@ -45,4 +45,8 @@ urlpatterns = patterns(
     url(r'^contactos/',
         include('contactos.urls', namespace='contactos')
         ),
+
+    url(r'^mercaderias/',
+        include('mercaderias.urls', namespace='mercaderias')
+        ),
 )

@@ -1,0 +1,4 @@
+- Mejorar la parte de categorias para manejar jerarquias de subcategorias y poder filtrar por estas
+- Agregar boton a la parte de cread/editar mercaderia para agregar una nueva categoria
+- Agregar boton + a crear/editar mercaderias... con este boton se agrega una categoria al item de mercaderia y deberia aparecer listada abajo
+- Pasar a lenguaje y zona horaria correctos
