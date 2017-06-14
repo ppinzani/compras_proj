@@ -41,11 +41,11 @@ def detalle_proveedor(request, uuid):
 def proveedor_cru(request, uuid=None):
 
     if uuid:
-        if not request.user.has_perm('proveedores.can_edit'):
+        if not request.user.has_perm('proveedores.change_proveedor'):
             return HttpResponseForbidden()
         proveedor = get_object_or_404(Proveedor, uuid=uuid)
     else:
-        if not request.user.has_perm('proveedores.can_add'):
+        if not request.user.has_perm('proveedores.add_proveedor'):
             return HttpResponseForbidden()
         proveedor = Proveedor()
 
@@ -71,10 +71,9 @@ def proveedor_cru(request, uuid=None):
     return render(request, template, variables)
 
 
-
 class BorrarProveedor(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Proveedor
     template_name = 'proveedores/eliminar_proveedor.html'
-    permission_required = 'proveedores.can_delete'
+    permission_required = 'proveedores.delete_proveedor'
     raise_exception = True
     success_url = '/proveedores/'

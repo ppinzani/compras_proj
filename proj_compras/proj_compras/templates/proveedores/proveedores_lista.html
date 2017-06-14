@@ -24,7 +24,7 @@
 
                 <div class="box box-primary">
                   <div class="box-header with-border">
-                    {% if perms.proveedores.can_add %}
+                    {% if perms.proveedores.add_proveedor %}
                     <h3 class="box-title"><a href="{% url 'proveedores:nuevo' %}" class="btn btn-success">
                       Nuevo Proveedor
                     </a></h3>
@@ -56,14 +56,12 @@
                           <td>{{ proveedor.get_condicion_iva_display }}</td>
                           <td>{{ proveedor.fecha_alta}}</td>
                           <td class="text-right">
-                                  {% if user.is_authenticated %}
                                   <a href="{{ proveedor.get_absolute_url }} " class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                  {% endif %}
 
-                                  {% if perms.proveedores.can_edit %}
+                                  {% if perms.proveedores.change_proveedor %}
                                   <a href="{{ proveedor.get_update_url }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
                                   {% endif %}
-                                  {% if perms.proveedores.can_delete %}
+                                  {% if perms.proveedores.delete_proveedor %}
                                   <a href="{{ proveedor.get_delete_url }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                                   {% endif %}
                             </td>

@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'contactos',
     'mercaderias',
     'usuarios',
+    'compras',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,7 +105,7 @@ WSGI_APPLICATION = 'proj_compras.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'compras',
+        'NAME': 'compras2',
         'USER': 'postgres',
         'PASSWORD': COMPRAS_DB_PASS,
         'HOST': '127.0.0.1',
@@ -116,9 +117,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ar'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
 USE_I18N = True
 
@@ -138,3 +139,5 @@ STATICFILES_DIRS = (
 
 LOGIN_REDIRECT_URL = '/proveedores/'
 LOGIN_URL = '/'
+
+AUTH_USER_MODEL = "usuarios.Usuario"

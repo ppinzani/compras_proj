@@ -25,7 +25,7 @@
 
                 <div class="box box-primary">
                   <div class="box-header with-border">
-                    {% if perms.mercaderias.can_add %}
+                    {% if perms.mercaderias.add_categoriamercaderia %}
                     <h3 class="box-title"><a href="{% url 'mercaderias:nueva_categoria' %}" class="btn btn-success">
                       Nueva Categoría
                     </a></h3>
@@ -51,10 +51,10 @@
                           <td>{{ forloop.counter}}</td>
                           <td>{{ categoria.nombre }}</td>
                           <td class="text-right">
-                                  {% if perms.mercaderias.can_edit %}
+                                  {% if perms.mercaderias.change_categoriamercaderia %}
                                   <a href="{{ categoria.get_update_url }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
                                   {% endif %}
-                                  {% if perms.mercaderias.can_delete %}
+                                  {% if perms.mercaderias.delete_categoriamercaderia %}
                                   <a href="{{ categoria.get_delete_url }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                                   {% endif %}
                             </td>

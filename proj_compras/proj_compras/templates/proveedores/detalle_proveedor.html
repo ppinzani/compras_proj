@@ -61,7 +61,7 @@
                         </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
                     <div id="cd-body" class="box-body">
-                        {% if perms.contactos.can_add %}
+                        {% if perms.contactos.add_contacto %}
                         <a href="{% url 'contactos:nuevo' %}?proveedor={{ proveedor.id }}" id="nuevo-contacto" class="btn btn-success"> <span class="glyphicon glyphicon-chevron"></span> Nuevo Contacto</a>
                         {% endif %}
                         <table id="cd-table" class="table table-responsive table table-hover">

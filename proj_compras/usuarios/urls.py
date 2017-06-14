@@ -5,12 +5,15 @@ from . import views
 urlpatterns = [
 
     url(regex=r'^$',
-        view=views.userlogin,
+        view=views.user_login,
         name='login'
         ),
 
+    url(regex=r'^logout/$',
+        view=views.user_logout,
+        name='logout'
+        ),
 
-    #url(r'^salir/$', 'apps.users.views.LogOut', name = 'logout'),
 #principal
     #url(r'^home', Home.as_view(), name='home'),
 ]

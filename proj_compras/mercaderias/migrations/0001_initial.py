@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import shortuuidfield.fields
 
 
 class Migration(migrations.Migration):
@@ -12,12 +11,23 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='CategoriaMercaderia',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('nombre', models.CharField(max_length=80)),
+                ('padre', models.OneToOneField(to='mercaderias.CategoriaMercaderia', null=True, blank=True)),
+            ],
+            options={
+                'verbose_name': 'Categoria De Mercaderia',
+                'verbose_name_plural': 'Categorias de Mercaderia',
+            },
+        ),
+        migrations.CreateModel(
             name='Mercaderia',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
-                ('uuid', shortuuidfield.fields.ShortUUIDField(editable=False, max_length=22, unique=True, blank=True)),
-                ('nombre', models.CharField(max_length=100)),
-                ('descripcion', models.TextField(blank=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('descripcion', models.CharField(blank=True, max_length=100)),
+                ('categoria', models.ManyToManyField(to='mercaderias.CategoriaMercaderia', blank=True)),
             ],
             options={
                 'verbose_name': 'Mercaderia',

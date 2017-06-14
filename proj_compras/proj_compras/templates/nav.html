@@ -19,28 +19,24 @@
             <ul class="nav navbar-nav">
 
               <!-- User Account: style can be found in dropdown.less -->
-          <!--     <li class="dropdown user user-menu">
+               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{ MEDIA_URL }}{{ user.avatar }}" class="img-circle" alt="User Image" height="20" width="20" >
-                  <span class="hidden-xs">{{ user.username|capfirst }} {{ user.last_name|capfirst }}</span>
+                  <span class="hidden-xs">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
                 </a>
-                <ul class="dropdown-menu"> -->
+                <ul class="dropdown-menu">
                   <!-- User image -->
-                <!--  <li class="user-header">
-                    <img src="{{ MEDIA_URL }}{{ user.avatar }}" class="img-circle" alt="User Image" >
+                 <li class="user-header">
                      <p>
-                       {{ user.username|capfirst }} {{ user.last_name|capfirst }}
-
+                       {{ user.first_name|capfirst }} {{ user.last_name|capfirst }}
                     </p>
-                  </li> -->
-
+                  </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
                       <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Salir</a>
+                      <a href="{% url 'usuarios:logout' %}" class="btn btn-default btn-flat">Salir</a>
                     </div>
                   </li>
                 </ul>
@@ -76,7 +72,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-child"></i> <span>Proveedores</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-truck"></i> <span>Proveedores</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{% url 'proveedores:lista' %}"><i class="fa fa-check-square"></i> Lista</a></li>
@@ -93,6 +89,16 @@
               <ul class="treeview-menu">
                 <li class="active"><a href="{% url 'mercaderias:lista' %}"><i class="fa fa-check-square"></i> Lista</a></li>
                 <li class="active"><a href="{% url 'mercaderias:lista_categorias' %}"><i class="fa fa-tags"></i> Categorias</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-shopping-cart"></i> <span>Compras</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="{% url 'compras:lista_solicitudes' %}"><i class="fa fa-check-square"></i> Solicitudes</a></li>
+                <li class="active"><a href="{% url 'compras:nueva_solicitud' %}"><i class="fa fa-save"></i> Nueva Solicitud</a></li>
               </ul>
             </li>
 

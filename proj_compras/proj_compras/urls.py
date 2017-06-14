@@ -49,4 +49,8 @@ urlpatterns = patterns(
     url(r'^mercaderias/',
         include('mercaderias.urls', namespace='mercaderias')
         ),
+
+    url(r'^compras/',
+        include('compras.urls', namespace='compras')
+        ),
 )

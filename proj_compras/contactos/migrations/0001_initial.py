@@ -8,22 +8,22 @@ import shortuuidfield.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('proveedores', '0009_auto_20170517_1618'),
+        ('proveedores', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Contacto',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
-                ('uuid', shortuuidfield.fields.ShortUUIDField(unique=True, max_length=22, editable=False, blank=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('uuid', shortuuidfield.fields.ShortUUIDField(blank=True, unique=True, editable=False, max_length=22)),
                 ('nombre', models.CharField(max_length=80)),
-                ('email', models.EmailField(max_length=254, blank=True)),
-                ('telefono', models.CharField(max_length=40, blank=True)),
-                ('direccion', models.CharField(max_length=80, blank=True)),
+                ('email', models.EmailField(blank=True, max_length=254)),
+                ('telefono', models.CharField(blank=True, max_length=40)),
+                ('direccion', models.CharField(blank=True, max_length=80)),
                 ('pagina_web', models.URLField(blank=True)),
                 ('detalles', models.TextField(blank=True)),
-                ('proveedor', models.ForeignKey(null=True, blank=True, to='proveedores.Proveedor')),
+                ('proveedor', models.ForeignKey(blank=True, null=True, to='proveedores.Proveedor')),
             ],
             options={
                 'verbose_name_plural': 'contactos',

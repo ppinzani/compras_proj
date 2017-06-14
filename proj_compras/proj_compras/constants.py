@@ -16,3 +16,12 @@ CONDICION_IVA_CHOICES = (
     (MONOTRIBUTO, 'Monotributo'),
     (OTRO, 'Otro'),
 )
+
+#CHoices para estado solicitud compra
+APROBADO = 'A'
+PENDIENTE = 'P'
+
+ESTADO_SOLICITUD_CHOICES = (
+    (APROBADO, 'Aprobada'),
+    (PENDIENTE, 'Aprobacion Pendiente'),
+)

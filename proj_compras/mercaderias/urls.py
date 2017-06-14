@@ -40,7 +40,7 @@ urlpatterns = [
         ),
 
     url(regex=r'^categorias/(?P<pk>[\w-]+)/borrar/$',
-        view=views.EliminarMercaderia.as_view(),
+        view=views.EliminarCategoria.as_view(),
         name='borrar_categoria'
         ),
 

@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+
 from django.shortcuts import redirect
 
 from .forms import LoginForm
 
 
 # Create your views here.
-def userlogin(request):
+def user_login(request):
     if request.method == "POST":
         if 'login_form' in request.POST:
             login_form = LoginForm(request.POST)
@@ -28,3 +29,8 @@ def userlogin(request):
     variables = {'login_form': login_form}
 
     return render(request, template, variables)
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('/')

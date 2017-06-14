@@ -8,10 +8,10 @@
        <!--- {% if user.is_authenticated %}
         <a href="{{ contacto.get_absolute_url }} " class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
         {% endif %} -->
-        {% if perms.contactos.can_edit %}
+        {% if perms.contactos.change_contacto %}
         <a href="{{ contacto.get_update_url }}?proveedor={{ proveedor.id }}" id="editar-contacto" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
         {% endif %}
-        {% if perms.contactos.can_delete %}
+        {% if perms.contactos.delete_contacto %}
         <a href="{{ contacto.get_delete_url }}" id="borrar-contacto" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
         {% endif %}
     </td>
