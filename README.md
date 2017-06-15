@@ -18,9 +18,9 @@ export ENV_ROLE="development"
 
 export COMPRAS_DB_PASS=(Aca pones el pass de la DB)
 
-export COMPRAS_SECRET_KEY="+mx#t3ymr)-c(fiagn#vubj+i*s6ju^t9@(-^p!bqk@lj@4hmo"
+export COMPRAS_SECRET_KEY="ey82^)qy8mkxot+tber=p!l5vd2wl574cxfne8hm^7r8+6^1z0"
 
-Instalar dj-static y short UUID: 
+Instalar dj-static y short UUID:
 
 pip install dj-static
 
