@@ -9,8 +9,8 @@ from proj_compras.constants import NO_ESPECIFICA
 # Create your models here.
 class Proveedor(models.Model):
     uuid = ShortUUIDField(unique=True)
-    nombre_fiscal = models.CharField(max_length=100)
-    nombre_fantasia = models.CharField(max_length=100, blank=True)
+    nombre_fiscal = models.CharField(max_length=80)
+    nombre_fantasia = models.CharField(max_length=80, blank=True)
     fecha_alta = models.DateField(default=now, blank=True)
     cuit = models.CharField(max_length=25, blank=True)
     margen_ganancia = models.SmallIntegerField(blank=True, null=True)
@@ -26,8 +26,8 @@ class Proveedor(models.Model):
             return self.nombre_fantasia
         return self.nombre_fiscal
 
-    def __unicode__(self):
-        return u"%s" % self.display_name
+    def __str__(self):
+        return "%s" % self.display_name()
 
     @models.permalink
     def get_absolute_url(self):

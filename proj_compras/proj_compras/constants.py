@@ -17,11 +17,13 @@ CONDICION_IVA_CHOICES = (
     (OTRO, 'Otro'),
 )
 
-#CHoices para estado solicitud compra
+#CHoices para estado solicitud compra/ Cotizacion
 APROBADO = 'A'
 PENDIENTE = 'P'
+RECHAZADO = 'R'
 
 ESTADO_SOLICITUD_CHOICES = (
     (APROBADO, 'Aprobada'),
-    (PENDIENTE, 'Aprobacion Pendiente'),
+    (PENDIENTE, 'Pendiente'),
+    (RECHAZADO, 'Rechazada'),
 )

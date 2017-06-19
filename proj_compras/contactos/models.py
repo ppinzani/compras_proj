@@ -27,6 +27,9 @@ class Contacto(models.Model):
     class Meta:
         verbose_name_plural = 'contactos'
 
+    def __str__(self):
+        return "%s" % self.nombre
+
     @models.permalink
     def get_absolute_url(self):
         return 'contactos:detalle', [self.uuid]

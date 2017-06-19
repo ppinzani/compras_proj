@@ -1,5 +1,5 @@
 {% extends "compras/base_compras.html" %}
-{% block title %}Compras | Solicitudes{% endblock title %}
+{% block title %}Compras | Cotizaciones{% endblock title %}
 {% block content %}
 {% include "nav.html" %}
 {% block producto %}
@@ -9,11 +9,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Solicitudes de Compra
+            Cotizaciones
           </h1>
           <ol class="breadcrumb">
             <li><a href=""><i class="fa fa-dashboard"></i>Inicio</a></li>
-            <li class="active">Solicitudes de Compra</li>
+            <li class="active">Cotizaciones</li>
           </ol>
         </section>
 
@@ -24,11 +24,13 @@
 
                 <div class="box box-primary">
                   <div class="box-header with-border">
+                    <!---
                     {% if perms.compras.add_solicituddecompra %}
                     <h3 class="box-title"><a href="{% url 'compras:nueva_solicitud' %}" class="btn btn-success">
                       Nueva Solicitud
                     </a></h3>
                     {% endif %}
+                    -->
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div><!-- /.box-tools -->
@@ -38,36 +40,36 @@
                     <thead>
                      <tr>
                         <th>N°</th>
-                        <th>Generada por</th>
                         <th>Fecha Generada</th>
                         <th>Estado</th>
-                        <th>Observaciones</th>
+                        <th>Proveedor</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
 
-                     {% for solicitud in solicitudes %}
+                     {% for cotizacion in cotizaciones %}
 
                         <tr>
                           <td>{{ forloop.counter}}</td>
-                          <td>{{ solicitud.generada_por }}</td>
-                          <td>{{ solicitud.fecha_generada }} </td>
-                          <td>{{ solicitud.get_estado_display }}</td>
-                          <td>{{ solicitud.observaciones }}</td>
+                          <td>{{ cotizacion.fecha_generada }} </td>
+                          <td>{{ cotizacion.get_estado_display }}</td>
+                          <td>{{ cotizacion.proveedor }}</td>
                           <td class="text-right">
                                   {% if user.is_authenticated %}
-                                  <a href="{{ solicitud.get_absolute_url }}" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                  <a href="{{ cotizacion.get_absolute_url }}" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
                                   {% endif %}
-                                  {% if perms.compras.change_solicituddecompra %}
-                                  <a href="{{ solicitud.get_update_url }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
+                                  {% if perms.compras.change_cotizacion %}
+                                  <a href="{{ cotizacion.get_update_url }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
                                   {% endif %}
-                                  {% if perms.compras.delete_solicituddecompra %}
-                                  <a href="{{ solicitud.get_delete_url }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                                  {% if perms.compras.delete_cotizacion %}
+                                  <a href="{{ cotizacion.get_delete_url }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                                   {% endif %}
+                                  <!--
                                   {% if solicitud.estado == "A" %}
-                                  <a href="{% url 'compras:nueva_cotizacion' %}?solicitud={{solicitud.id}}" class="btn btn-info"><span class="glyphicon glyphicon-usd"></span></a>
+                                  <a href="#" class="btn btn-info"><span class="glyphicon glyphicon-usd"></span></a>
                                   {% endif %}
+                                -->
                             </td>
 
                           </tr>

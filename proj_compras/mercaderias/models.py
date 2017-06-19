@@ -15,9 +15,6 @@ class CategoriaMercaderia(models.Model):
         verbose_name = "Categoria De Mercaderia"
         verbose_name_plural = "Categorias de Mercaderia"
 
-    def __unicode__(self):
-        return u"%s" % self.nombre
-
     def __str__(self):
         return u"%s" % self.nombre
 

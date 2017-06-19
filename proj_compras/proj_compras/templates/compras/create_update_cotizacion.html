@@ -1,5 +1,5 @@
 {% extends "compras/base_compras.html" %}
-{% block title %}Compras | Nueva Solicitud{% endblock title %}
+{% block title %}Compras | Nueva Cotizacion{% endblock title %}
 {% block content %}
 {% include "nav.html" %}
 {% block producto %}
@@ -9,12 +9,12 @@
          <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Solicitudes de Compra
+            Cotizaciones
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
-            <li><a href="{% url 'compras:lista_solicitudes' %}">Solicitudes de Compra</a></li>
-            <li class="active">Nueva/Editar</li>
+            <li><a href="#">Cotizaciones</a></li>
+            <li class="active">Nueva/Editar Cotizacion</li>
           </ol>
         </section>
         <!-- Main content -->
@@ -25,7 +25,7 @@
           <div class="box box-info">
             <div class="box-header with-border">
 
-              <a href="{% url 'compras:lista_solicitudes' %}" class="btn btn-success">
+              <a href="{% url 'compras:lista_cotizaciones' %}" class="btn btn-success">
                     <span class="glyphicon glyphicon-chevron-left"></span> Regresar
               </a>
 
@@ -43,26 +43,20 @@
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-10">
-                                    <div class="form-group has-success has-feedback  {% if solicitud_form.generada_por.errors %} has-error {% endif %}">
-                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ solicitud_form.generada_por.label_tag }}</label>
+                                    <div class="form-group has-success has-feedback  {% if cotizacion_form.estado.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ cotizacion_form.estado.label_tag }}</label>
                                         <div class="col-sm-6">
-                                            {{ solicitud_form.generada_por }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group has-success has-feedback  {% if solicitud_form.estado.errors %} has-error {% endif %}">
-                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ solicitud_form.estado.label_tag }}</label>
-                                        <div class="col-sm-6">
-                                            {% if perms.compras.puede_aprobar_solicitud %}
-                                                {{ solicitud_form.estado }}
+                                            {% if perms.compras.puede_aprobar_cotizacion %}
+                                                {{ cotizacion_form.estado }}
                                             {% else %}
-                                                {{ solicitud.get_estado_display }}
+                                                {{ cotizacion.get_estado_display }}
                                             {% endif %}
                                         </div>
                                     </div>
-                                    <div class="form-group has-success has-feedback  {% if solicitud_form.observaciones.errors %} has-error {% endif %}">
-                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ solicitud_form.observaciones.label_tag }}</label>
+                                    <div class="form-group has-success has-feedback  {% if cotizacion_form.proveedor.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ cotizacion_form.proveedor.label_tag }}</label>
                                         <div class="col-sm-6">
-                                            {{ solicitud_form.observaciones }}
+                                            {{ cotizacion_form.proveedor }}
                                         </div>
                                     </div>
                                 </div>
@@ -78,6 +72,7 @@
                                         <tr>
                                             <th scope="col">Cantidad</th>
                                             <th scope="col">Detalle</th>
+                                            <th scope="col">Precio Unitario</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,6 +90,14 @@
                                               {{ detalle_form.mercaderia }}
                                               {% if detalle_form.mercaderia.errors %}
                                                   {% for error in detalle_form.mercaderia.errors %}
+                                                      {{ error|escape }}
+                                                  {% endfor %}
+                                              {% endif %}
+                                            </td>
+                                            <td>
+                                              {{ detalle_form.precio }}
+                                              {% if detalle_form.precio.errors %}
+                                                  {% for error in detalle_form.precio.errors %}
                                                       {{ error|escape }}
                                                   {% endfor %}
                                               {% endif %}
