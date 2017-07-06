@@ -1,0 +1,163 @@
+{% extends "compras/base_compras.html" %}
+{% block title %}Compras | Nueva Orden de Compra{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+{% block producto %}
+<div class="wrapper">
+      <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+         <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Ordenes de Compra
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
+            <li><a href="{% url 'compras:lista_ordenes' %}">Ordenes de Compra</a></li>
+            <li class="active">Nueva/Editar</li>
+          </ol>
+        </section>
+        <!-- Main content -->
+    <section class="content">
+      <!-- START ALERTS AND CALLOUTS -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{% url 'compras:lista_ordenes' %}" class="btn btn-success">
+                              <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class"page-header"> Pagos </h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div><!-- /.box-tools -->
+                    </div>
+                </div>
+            </div><!-- /.box-header -->
+                <div class="box-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    <form class="form-horizontal" method="post">
+                    {% csrf_token %}
+                        <div class="container">
+                            <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group has-success has-feedback  {% if orden_form.numero.errors %} has-error {% endif %}">
+                                            <label class="control-label col-sm-2" for="inputSuccess3">{{ orden_form.numero.label_tag }}</label>
+                                            <div class="col-sm-4">
+                                                {{ orden_form.numero }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-success has-feedback  {% if orden_form.forma_de_pago.errors %} has-error {% endif %}">
+                                            <label class="control-label col-sm-2" for="inputSuccess3">{{ orden_form.forma_de_pago.label_tag }}</label>
+                                            <div class="col-sm-4" id="id_forma_de_pago">
+                                                {{ orden_form.forma_de_pago }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-success has-feedback ">
+                                            <label class="control-label col-sm-2" for="inputSuccess3">Cuotas:</label>
+                                            <div class="col-sm-4">
+                                                <input type="number" name="cuotas" class="form-control" id="id_pago_cuotas" disabled>
+                                            </div>
+                                        </div>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="form-display-label col-sm-2">Proveedor:</td>
+                                                    <td class="col-sm-4">{{ orden.cotizacion.proveedor }} </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-6" id="id_seccion_pagos">
+                                        {% include 'compras/pagos_form.html'%}
+                                    </div> <!--col-->
+                            </div>
+                        </div> <!--section-->
+
+                        <div class="panel-body">
+                            <h3 class="page-header"> Detalle </h3>
+
+                                <table class="table-striped table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Detalle</th>
+                                            <th scope="col">Precio Unitario</th>
+                                            <th scope="col">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for detalle in detalles %}
+                                        <tr>
+                                            <td>{{ detalle.cantidad }}</td>
+                                            <td>{{ detalle.mercaderia }}</td>
+                                            <td>{{ detalle.precio }}</td>
+                                            <td>{{ detalle.get_subtotal }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="panel-footer color-footer">
+                                    <button type="submit" class="btn btn-primary">
+                                                 Grabar
+                                    </button>
+                                    {% if perms.compras.add_pagodecompra %}
+                                    <button type="button" class="btn btn-success" id="id_btn_agregar_pagos">
+                                        Agregar Pagos
+                                    </button>
+                                    {% endif %}
+                                </div>
+                          </div> <!--panel-body-->
+                          </form>
+              </div><!-- /.box body -->
+          </div><!-- /.box info -->
+          </div><!--col-->
+        </div><!-- /.row -->
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+{% include "footer.html" %}
+{% endblock producto%}
+{% endblock content %}
+{% block js %}
+    {{ block.super }}
+    <script>
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results==null){
+               return null;
+            }
+            else{
+               return decodeURI(results[1]) || 0;
+            }
+        }
+
+        $(document).ready(function() {
+            $("#id_forma_de_pago").change(function(){
+                if($("#id_forma_de_pago_form").val() == "C"){
+                    $("#id_pago_cuotas").prop("disabled", false);
+                }
+                else{
+                    $("#id_pago_cuotas").prop("disabled", true);
+                }
+            });
+
+            $("#id_btn_agregar_pagos").click(function(){
+                var cuotas = $("#id_pago_cuotas").val();
+                var url = $(location).attr("pathname");
+                var cotizacion = $.urlParam("cotizacion");
+                $.get(url, {cuotas: cuotas, cotizacion: cotizacion}, function(data){
+                    $("#id_seccion_pagos").html(data);
+                });
+                //$("#test").text("Aprete el Boton! Cuotas: " + url);
+            });
+        });
+    </script>
+{% endblock js%}

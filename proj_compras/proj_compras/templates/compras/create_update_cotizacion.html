@@ -1,5 +1,5 @@
 {% extends "compras/base_compras.html" %}
-{% block title %}Compras | Nueva Cotizacion{% endblock title %}
+{% block title %}Compras | Cotizaciones{% endblock title %}
 {% block content %}
 {% include "nav.html" %}
 {% block producto %}
@@ -59,6 +59,12 @@
                                             {{ cotizacion_form.proveedor }}
                                         </div>
                                     </div>
+                                    <div class="form-group has-success has-feedback  {% if cotizacion_form.descuento.errors %} has-error {% endif %}">
+                                        <label class="control-label col-sm-2" for="inputSuccess3">{{ cotizacion_form.descuento.label_tag }}</label>
+                                        <div class="col-sm-6">
+                                            {{ cotizacion_form.descuento }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div> <!--<div class="row"> -->
                             <div class="row">
@@ -113,6 +119,33 @@
                                         {% endfor %}
                                     {% endif %}
                                 </table>
+                                <div class="col-xs-6">
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="lead"> Totales de la compra </div>
+                                    <div class"table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th style="width:50%">Subtotal:</th>
+                                                    <td align="center"> {{ cotizacion.get_subtotal }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width:50%">Descuento({{ orden.cotizacion.descuento }}%):</th>
+                                                    <td align="center"> {{ cotizacion.get_calculo_descuento }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width:50%">IVA({{cotizacion.iva}}%):</th>
+                                                    <td align="center"> {{ cotizacion.get_calculo_iva }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width:50%">Total: $:</th>
+                                                    <td align="center"> {{ cotizacion.get_total }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div> <!--<div class="row"> -->
                                 <div class="panel-footer color-footer">
                                     <button type="submit" class="btn btn-primary">

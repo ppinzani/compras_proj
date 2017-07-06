@@ -1,5 +1,5 @@
 {% extends "compras/base_compras.html" %}
-{% block title %}Compras | Cotizaciones{% endblock title %}
+{% block title %}Compras | Ordenes {% endblock title %}
 {% block content %}
 {% include "nav.html" %}
 {% block producto %}
@@ -9,11 +9,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Cotizaciones
+            Ordenes de Compra
           </h1>
           <ol class="breadcrumb">
             <li><a href=""><i class="fa fa-dashboard"></i>Inicio</a></li>
-            <li class="active">Cotizaciones</li>
+            <li class="active">Ordenes de Compra</li>
           </ol>
         </section>
 
@@ -24,13 +24,11 @@
 
                 <div class="box box-primary">
                   <div class="box-header with-border">
-                    <!---
                     {% if perms.compras.add_solicituddecompra %}
                     <h3 class="box-title"><a href="{% url 'compras:nueva_solicitud' %}" class="btn btn-success">
-                      Nueva Solicitud
+                      Nueva Orden
                     </a></h3>
                     {% endif %}
-                    -->
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div><!-- /.box-tools -->
@@ -40,33 +38,30 @@
                     <thead>
                      <tr>
                         <th>N°</th>
-                        <th>Fecha Generada</th>
-                        <th>Estado</th>
                         <th>Proveedor</th>
+                        <th>Fecha Generada</th>
+                        <th>Importe</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
 
-                     {% for cotizacion in cotizaciones %}
+                     {% for orden in ordenes %}
 
                         <tr>
-                          <td>{{ forloop.counter}}</td>
-                          <td>{{ cotizacion.fecha_generada }} </td>
-                          <td>{{ cotizacion.get_estado_display }}</td>
-                          <td>{{ cotizacion.proveedor }}</td>
+                          <td>{{ orden.numero}}</td>
+                          <td>{{ orden.cotizacion.proveedor }}</td>
+                          <td>{{ orden.fecha_generada }} </td>
+                          <td>{{ orden.cotizacion.get_total}}</td>
                           <td class="text-right">
                                   {% if user.is_authenticated %}
-                                  <a href="{{ cotizacion.get_absolute_url }}" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                  <a href="{{ orden.get_absolute_url }}" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
                                   {% endif %}
-                                  {% if perms.compras.change_cotizacion %}
-                                  <a href="{{ cotizacion.get_update_url }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
+                                  {% if perms.compras.change_ordendecompra %}
+                                  <a href="{{ orden.get_update_url }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
                                   {% endif %}
-                                  {% if perms.compras.delete_cotizacion %}
-                                  <a href="{{ cotizacion.get_delete_url }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
-                                  {% endif %}
-                                  {% if cotizacion.estado == "A" %}
-                                  <a href="{% url 'compras:nueva_orden' %}?cotizacion={{cotizacion.id}}" class="btn btn-info"><span class="glyphicon glyphicon-credit-card"></span></a>
+                                  {% if perms.compras.delete_ordendecompra %}
+                                  <a href="{{ orden.get_delete_url }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                                   {% endif %}
                             </td>
 

@@ -1,0 +1,31 @@
+<h4 class="col-md-12"> Pagos </h4>
+{{ pagos_formset.management_form }}
+<table class="table">
+    <tbody>
+    {% for pago_form in pagos_formset %}
+        <tr>
+            <td class="col-sm-6">
+                {{ pago_form.fecha_de_pago }}
+                {% if pago_form.fecha_de_pago.errors %}
+                    {% for error in pago_form.fecha_de_pago.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                {% endif %}
+            </td>
+            <td class="col-sm-6">
+              {{ pago_form.importe }}
+              {% if pago_form.importe.errors %}
+                  {% for error in pago_form.importe.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+              {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    {% if pago_form.non_form_errors %}
+        {% for error in pago_form.non_form_errors %}
+            {{ error|escape }}
+        {% endfor %}
+    {% endif %}
+</table>

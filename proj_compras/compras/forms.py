@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 
 from .models import SolicitudDeCompra, DetalleSolicitud
 from .models import Cotizacion, DetalleCotizacion
+from .models import OrdenDeCompra, PagoDeCompra
+from .models import FacturaDeCompra
 from proveedores.models import Proveedor
 
 User = get_user_model()
@@ -104,9 +106,12 @@ class DetalleCotizacionForm(forms.ModelForm):
 class CotizacionForm(forms.ModelForm):
     class Meta:
         model = Cotizacion
-        fields = ('estado', 'proveedor')
+        fields = ('estado', 'proveedor', 'descuento')
         widgets = {
             'estado': forms.Select(
+                attrs={'class': 'form-control'}
+            ),
+            'descuento': forms.NumberInput(
                 attrs={'class': 'form-control'}
             ),
         }
@@ -168,3 +173,107 @@ class BaseCotizacionFormSet(BaseFormSet):
                     'El campo de precio unitario esta vacio.',
                     code='cotizacion_precio_vacio'
                 )
+
+
+class OrdenDeCompraForm(forms.ModelForm):
+    class Meta:
+        model = OrdenDeCompra
+        fields = ('numero', 'forma_de_pago', 'cuotas')
+        widgets = {
+            'numero': forms.TextInput(attrs={'class': 'form-control'}),
+            'forma_de_pago': forms.Select(
+                attrs={'class': 'form-control',
+                       'id': 'id_forma_de_pago_form'}
+            ),
+            'cuotas': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'id': 'id_pago_cuotas',
+                }
+            ),
+        }
+
+
+class PagoDeCompraForm(forms.ModelForm):
+    class Meta:
+        model = PagoDeCompra
+        fields = ('fecha_de_pago', 'importe', 'estado')
+        widgets = {
+            'fecha_de_pago': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Vencimiento'
+                }
+            ),
+            'importe': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Importe'
+                }
+            ),
+            'estado': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Estado'
+                }
+            ),
+        }
+
+
+class BasePagoFormSet(BaseFormSet):
+    def clean(self):
+        '''
+        Agrego validacion para que no haya precio o fecha vacio
+        '''
+        if any(self.errors):
+            return
+
+        for form in self.forms:
+            importe = form.cleaned_data.get('importe')
+            fecha = form.cleaned_data.get('fecha_de_pago')
+
+            #Chequeo que esten completas la cantidad y detalle
+            if importe and not fecha:
+                raise forms.ValidationError(
+                    'El campo de vencimiento esta vacio.',
+                    code='fecha_vencimiento_vacio'
+                )
+
+            if not importe and fecha:
+                raise forms.ValidationError(
+                    'El campo de impoprte esta vacio.',
+                    code='importe_vacio'
+                )
+
+
+class FacturaDeCompraForm(forms.ModelForm):
+    class Meta:
+        model = FacturaDeCompra
+        fields = ('numero', 'fecha', 'importe', 'foto', 'tipo')
+        widgets = {
+            'numero': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'fecha': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'importe': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'tipo': forms.Select(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'foto': forms.ClearableFileInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+        }

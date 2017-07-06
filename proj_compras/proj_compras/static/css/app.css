@@ -1,0 +1,7 @@
+.form-display-label {
+    text-align: right;
+    color: #00a65a;
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    display: inline-block !important;
+}

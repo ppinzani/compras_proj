@@ -21,7 +21,7 @@ class ActualizarMercaderia(LoginRequiredMixin, PermissionRequiredMixin, UpdateVi
     template_name = 'mercaderias/create_update_mercaderias.html'
     model = Mercaderia
     success_url = '/mercaderias/'
-    permission_required = 'mercaderias.can_edit'
+    permission_required = 'mercaderias.change_mercaderia'
     raise_exception = True
 
 
@@ -29,7 +29,7 @@ class EliminarMercaderia(LoginRequiredMixin, PermissionRequiredMixin, DeleteView
     model = Mercaderia
     success_url = '/mercaderias/'
     template_name = 'mercaderias/eliminar_mercaderia.html'
-    permission_required = 'mercaderias.can_delete'
+    permission_required = 'mercaderias.delete_mercaderia'
     raise_exception = True
 
 
@@ -38,7 +38,7 @@ class CrearMercaderia(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'mercaderias/create_update_mercaderias.html'
     model = Mercaderia
     success_url = '/mercaderias/'
-    permission_required = 'mercaderias.can_add'
+    permission_required = 'mercaderias.add_mercaderia'
     raise_exception = True
 
 
@@ -56,7 +56,7 @@ class ActualizarCategoria(LoginRequiredMixin, UpdateView):
     template_name = 'mercaderias/create_update_categorias.html'
     model = CategoriaMercaderia
     success_url = '/mercaderias/categorias/'
-    #permission_required = 'mercaderias.can_edit'
+    permission_required = 'mercaderias.change_categoriamercaderia'
     raise_exception = True
 
 
@@ -64,7 +64,7 @@ class EliminarCategoria(LoginRequiredMixin, DeleteView):
     model = CategoriaMercaderia
     success_url = '/mercaderias/categorias/'
     template_name = 'mercaderias/eliminar_categoria.html'
-    permission_required = 'mercaderias.can_delete'
+    permission_required = 'mercaderias.delete_categoriamercaderia'
     raise_exception = True
 
 
@@ -73,5 +73,5 @@ class CrearCategoria(LoginRequiredMixin, CreateView):
     template_name = 'mercaderias/create_update_categorias.html'
     model = CategoriaMercaderia
     success_url = '/mercaderias/categorias/'
-    #permission_required = 'mercaderias.can_add'
+    permission_required = 'mercaderias.add_categoriamercaderia'
     raise_exception = True

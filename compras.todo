@@ -2,4 +2,5 @@
 - Agregar boton a la parte de cread/editar mercaderia para agregar una nueva categoria
 - Agregar boton + a crear/editar mercaderias... con este boton se agrega una categoria al item de mercaderia y deberia aparecer listada abajo
 - Arreglar el tema de agregar mercaderia (VEr manytomanyfield)
-
+- Agregar funcionalidad de pedido de cotizacion (Generar un txt)
+- Agregar choices a solicitud de compra o orden de compra (En solicitud no iria rechazada)

@@ -68,4 +68,54 @@ urlpatterns = [
         view=views.RechazarCotizacion.as_view(),
         name='rechazar_cotizacion'
         ),
+
+    url(regex=r'^ordenes/$',
+        view=views.OrdenesList.as_view(),
+        name='lista_ordenes'
+        ),
+
+    url(regex=r'^ordenes/nueva/$',
+        view=views.orden_de_compra_cru,
+        name='nueva_orden'
+        ),
+
+    url(regex=r'^ordenes/(?P<pk>[\w-]+)/$',
+        view=views.detalle_orden,
+        name='detalle_orden'
+        ),
+
+    url(regex=r'^ordenes/(?P<pk>[\w-]+)/editar/$',
+        view=views.orden_de_compra_cru,
+        name='editar_orden'
+        ),
+
+    url(regex=r'^ordenes/(?P<pk>[\w-]+)/borrar/$',
+        view=views.BorrarOrdenDeCompra.as_view(),
+        name='borrar_orden'
+        ),
+
+    url(regex=r'^facturas/$',
+        view=views.FacturasList.as_view(),
+        name='lista_facturas'
+        ),
+
+    url(regex=r'^facturas/nueva/$',
+        view=views.CrearFactura.as_view(),
+        name='nueva_factura'
+        ),
+
+    url(regex=r'^facturas/(?P<pk>[\w-]+)/$',
+        view=views.DetalleFactura.as_view(),
+        name='detalle_factura'
+        ),
+
+    url(regex=r'^facturas/(?P<pk>[\w-]+)/editar/$',
+        view=views.ActualizarFactura.as_view(),
+        name='editar_factura'
+        ),
+
+    url(regex=r'^facturas/(?P<pk>[\w-]+)/borrar/$',
+        view=views.BorrarFactura.as_view(),
+        name='borrar_factura'
+        ),
 ]

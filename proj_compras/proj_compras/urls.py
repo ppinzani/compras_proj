@@ -14,6 +14,7 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.conf import settings
 
 
 admin.autodiscover()
@@ -54,3 +55,9 @@ urlpatterns = patterns(
         include('compras.urls', namespace='compras')
         ),
 )
+#Added for debug toolbar
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
