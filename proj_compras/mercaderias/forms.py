@@ -11,8 +11,8 @@ class MercaderiaForm(forms.ModelForm):
             'descripcion': forms.TextInput(
                 attrs={'placeholder': 'Descripción', 'class': 'form-control'}
             ),
-            'categoria': forms.Select(
-                attrs={'placeholder': 'Categoria', 'class': 'form-control'}
+            'categoria': forms.SelectMultiple(
+                attrs={'placeholder': 'Categorias', 'class': 'form-control'}
             ),
         }
 

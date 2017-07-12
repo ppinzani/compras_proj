@@ -1,5 +1,5 @@
 {% extends "compras/base_compras.html" %}
-{% block title %}Compras | Detalle Cotizacion{% endblock title %}
+{% block title %}Compras | Detalle Factura de Compra{% endblock title %}
 {% block content %}
 {% include "nav.html" %}
 {% block producto %}
@@ -14,7 +14,7 @@
           <div class="box box-info">
 
             <div class="box-header with-border">
-                <a href="{% url 'compras:lista_cotizaciones'%}" class="btn btn-success">
+                <a href="{% url 'compras:lista_facturas'%}" class="btn btn-success">
                     <span class="glyphicon glyphicon-chevron-left"></span> Regresar
                 </a>
                     <div class="box-tools pull-right">
@@ -26,20 +26,20 @@
                         <table class="table table-striped table table-hover ">
                             <tbody>
                                 <tr class="success">
-                                      <td><strong>Fecha de Generación:</strong></td>
-                                      <td>{{ cotizacion.fecha_generada }} </td>
+                                      <td><strong>Numero:</strong></td>
+                                      <td>{{ factura.numero }} </td>
                                 </tr>
                                 <tr class="success">
-                                   <td><strong>Estado:</strong></td>
-                                   <td>{{ cotizacion.get_estado_display }}</td>
+                                      <td><strong>Fecha:</strong></td>
+                                      <td>{{ factura.fecha }} </td>
                                 </tr>
                                 <tr class="success">
-                                   <td><strong>Modificada Por:</strong></td>
-                                   <td>{{ cotizacion.modificad_por }}</td>
+                                   <td><strong>Tipo:</strong></td>
+                                   <td>{{ factura.get_tipo_display }}</td>
                                 </tr>
                                 <tr class="success">
                                    <td><strong>Proveedor:</strong></td>
-                                   <td>{{ cotizacion.proveedor }}</td>
+                                   <td>{{ factura.get_proveedor }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -56,7 +56,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for detalle in detalles %}
+                                {% for detalle in factura.get_detalles %}
                                     <tr>
                                         <td> {{ detalle.cantidad }} </td>
                                         <td> {{ detalle.mercaderia }} </td>
@@ -75,33 +75,26 @@
                                     <tbody>
                                         <tr>
                                             <th style="width:50%">Subtotal:</th>
-                                            <td align="center"> {{ cotizacion.get_subtotal }}</td>
+                                            <td align="center"> {{ factura.get_subtotal }}</td>
                                         </tr>
                                         <tr>
-                                            <th style="width:50%">Descuento({{ orden.cotizacion.descuento }}%):</th>
-                                            <td align="center"> {{ cotizacion.get_calculo_descuento }}</td>
+                                            <th style="width:50%">Descuento({{ factura.orden.cotizacion.descuento }}%):</th>
+                                            <td align="center"> {{ factura.get_calculo_descuento }}</td>
                                         </tr>
                                         <tr>
-                                            <th style="width:50%">IVA({{cotizacion.iva}}%):</th>
-                                            <td align="center"> {{ cotizacion.get_calculo_iva }}</td>
+                                            <th style="width:50%">IVA({{factura.orden.cotizacion.iva}}%):</th>
+                                            <td align="center"> {{ factura.get_calculo_iva }}</td>
                                         </tr>
                                         <tr>
                                             <th style="width:50%">Total: $:</th>
-                                            <td align="center"> {{ cotizacion.get_total }}</td>
+                                            <td align="center"> {{ factura.get_total }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div> <!-- panel-body -->
-                    <a href="{{ cotizacion.get_update_url }}" class="btn btn-primary"> Editar </a>
-                    {% if perms.compras.puede_aprobar_cotizacion and cotizacion.estado == "P" %}
-                    <a href="{{ cotizacion.get_aprobar_url }}" class="btn btn-warning text-right"> Aprobar Cotizacion </a>
-                    <a href="{{ cotizacion.get_rechazar_url }}" class="btn btn-danger"> Rechazar Cotizacion </a>
-                    {% endif %}
-                    {% if cotizacion.estado == "A" %}
-                    <a href="#" class="btn btn-success"> Generar Orden de Compra </a>
-                    {% endif %}
+
               </div><!-- /.box -->
           </div><!-- /.col -->
         </div><!-- /.row -->

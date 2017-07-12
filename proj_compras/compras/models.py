@@ -158,8 +158,8 @@ class DetalleCotizacion(models.Model):
         return self.cantidad * self.precio
 
     class Meta:
-        verbose_name = "DetalleOrdenCompra"
-        verbose_name_plural = "DetallesSolicitud"
+        verbose_name = "DetalleCotizacion"
+        verbose_name_plural = "DetallesCotizacion"
 
     def __str__(self):
         return "%s" % self.id
@@ -174,6 +174,9 @@ class OrdenDeCompra(models.Model):
         null=True  # Fixme cambiar por blank
     )
     cuotas = models.PositiveIntegerField(blank=True, default=1)
+    #fecha_generada
+    #fecha_ultima_modificacion
+    #fecha_de_entrega
 
     class Meta:
         verbose_name = "OrdenDeCompra"
@@ -233,6 +236,24 @@ class FacturaDeCompra(models.Model):
     def get_proveedor(self):
         return self.orden.cotizacion.proveedor
 
+    def get_detalles(self):
+        detalles = DetalleCotizacion.objects.filter(
+            cotizacion=self.orden.cotizacion
+        )
+        return detalles
+
+    def get_subtotal(self):
+        return self.orden.get_subtotal()
+
+    def get_calculo_iva(self):
+        return self.orden.get_calculo_iva()
+
+    def get_calculo_descuento(self):
+        return self.orden.get_calculo_descuento()
+
+    def get_total(self):
+        return self.orden.get_total()
+
     @models.permalink
     def get_absolute_url(self):
         return 'compras:detalle_factura', [self.id]
@@ -273,6 +294,7 @@ class PagoDeCompra(models.Model):
                               null=True,
                               blank=True,
                               default=PAGO_PENDIENTE)
+    foto = models.ImageField(upload_to='comprobantes_de_pago', blank=True)
 
     class Meta:
         verbose_name = "PagoDeCompra"

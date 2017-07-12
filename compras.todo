@@ -3,4 +3,14 @@
 - Agregar boton + a crear/editar mercaderias... con este boton se agrega una categoria al item de mercaderia y deberia aparecer listada abajo
 - Arreglar el tema de agregar mercaderia (VEr manytomanyfield)
 - Agregar funcionalidad de pedido de cotizacion (Generar un txt)
-- Agregar choices a solicitud de compra o orden de compra (En solicitud no iria rechazada)
+- Cuando genero el pedido de cotizacion puedo tildar que items quiero pedir al proveedor
+- Agregar descuenta a cada item del detalle de la cotizacion
+- Agregar iva a la mercaderia (Cada mercaderia puede tener un iva distinto)
+- Agregar estado a orden de compra (Enviada, Confirmada por proveedor, )
+- cotizaciones/solicitudes de compra en negro
+- Agregar tabla de relacion entre mercaderia y proveedor
+- En cotizacion sugerir ultimo precio pagado a ese proveedor por esa mercaderia
+- Donde genero la solicitud ver como puedo mejorar la parte de elegir als mercaderias (Filtrar por proveedor o tipo de mercaderia) ---> Puedo ahcer un presupuesto estimado
+- Agregar mas estados al pego (Pagado con comprabante enviado o no) ----> Agregar comprobante (foto)
+- En mercaderias agregar codigo interno, ver como se puede
+- Inventario (tener un detalle )

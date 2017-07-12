@@ -39,10 +39,12 @@ ESTADO_COTIZACION_CHOICES = (
 
 #Choices para estado Pago
 PAGO_PAGADO = 'Pa'
+PAGO_PAGADO_COMPROBANTE = 'Pc'
 PAGO_PENDIENTE = 'Pe'
 
 ESTADO_PAGO_CHOICES = (
     (PAGO_PAGADO, 'Pagado'),
+    (PAGO_PAGADO_COMPROBANTE, 'Pagado, Comprobante Enviado'),
     (PAGO_PENDIENTE, 'Pendiente'),
 )
 

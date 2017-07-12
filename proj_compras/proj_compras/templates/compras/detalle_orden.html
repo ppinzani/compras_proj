@@ -115,11 +115,11 @@
                                                         <td align="center"> {{ orden.get_subtotal }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th style="width:50%">Descuento({{ orden.descuento }}%):</th>
+                                                        <th style="width:50%">Descuento({{ orden.cotizacion.descuento }}%):</th>
                                                         <td align="center"> {{ orden.get_calculo_descuento }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th style="width:50%">IVA({{orden.iva}}%):</th>
+                                                        <th style="width:50%">IVA({{orden.cotizacion.iva}}%):</th>
                                                         <td align="center"> {{ orden.get_calculo_iva }}</td>
                                                     </tr>
                                                     <tr>

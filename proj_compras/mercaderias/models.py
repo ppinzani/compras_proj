@@ -41,9 +41,6 @@ class Mercaderia(models.Model):
         verbose_name = "Mercaderia"
         verbose_name_plural = "Mercaderias"
 
-    def __unicode__(self):
-        return u"%s" % self.descripcion
-
     def __str__(self):
         return u"%s" % self.descripcion
 
