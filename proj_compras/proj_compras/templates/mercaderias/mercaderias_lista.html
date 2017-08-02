@@ -39,6 +39,8 @@
                      <tr>
                         <th>N°</th>
                         <th>Descripción</th>
+                        <th>Categorias</th>
+                        <th>IVA</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
@@ -49,6 +51,8 @@
                         <tr>
                           <td>{{ forloop.counter}}</td>
                           <td>{{ mercaderia.descripcion }}</td>
+                          <td> </td>
+                          <td>{{ mercaderia.iva }}%</td>
                           <td class="text-right">
                                   {% if perms.mercaderias.change_mercaderias %}
                                   <a href="{{ mercaderia.get_update_url }}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>

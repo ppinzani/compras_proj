@@ -1,12 +1,10 @@
 - Mejorar la parte de categorias para manejar jerarquias de subcategorias y poder filtrar por estas
-- Agregar boton a la parte de cread/editar mercaderia para agregar una nueva categoria
 - Agregar boton + a crear/editar mercaderias... con este boton se agrega una categoria al item de mercaderia y deberia aparecer listada abajo
-- Arreglar el tema de agregar mercaderia (VEr manytomanyfield)
 - Agregar funcionalidad de pedido de cotizacion (Generar un txt)
 - Cuando genero el pedido de cotizacion puedo tildar que items quiero pedir al proveedor
-- Agregar descuenta a cada item del detalle de la cotizacion
+- Agregar descuento a cada item del detalle de la cotizacion
 - Agregar iva a la mercaderia (Cada mercaderia puede tener un iva distinto)
-- Agregar estado a orden de compra (Enviada, Confirmada por proveedor, )
+- Agregar estado a orden de compra (Enviada, Confirmada por proveedor, Enviada por proveedor, Recibida)
 - cotizaciones/solicitudes de compra en negro
 - Agregar tabla de relacion entre mercaderia y proveedor
 - En cotizacion sugerir ultimo precio pagado a ese proveedor por esa mercaderia
@@ -14,3 +12,6 @@
 - Agregar mas estados al pego (Pagado con comprabante enviado o no) ----> Agregar comprobante (foto)
 - En mercaderias agregar codigo interno, ver como se puede
 - Inventario (tener un detalle )
+- En inventario, cuando se consulta una mercaderia mostrar si hay algun orden de compra pendiente de entrega que incluya esta mercaderia.
+- AGREGAR DETALLE DE ORDEN DE COMPRA
+- Agregar a mercaderia proveedor un codigo interno y precio pagado. Agregar link para editar esto. Agregar precio de venta

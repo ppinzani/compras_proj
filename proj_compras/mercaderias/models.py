@@ -1,6 +1,7 @@
 from django.db import models
 
 from shortuuidfield import ShortUUIDField
+from proveedores.models import Proveedor
 
 
 # Create your models here.
@@ -32,10 +33,13 @@ class CategoriaMercaderia(models.Model):
 
 
 class Mercaderia(models.Model):
-    #uuid = ShortUUIDField(unique=True)
+    #sku = FIXME
     descripcion = models.CharField(max_length=100, blank=True)
-    categoria = models.ManyToManyField(CategoriaMercaderia,
-                                       blank=True)
+    categorias = models.ManyToManyField(CategoriaMercaderia, blank=True)
+    iva = models.DecimalField(max_digits=4, decimal_places=2, default=21.0)
+    #Fecha ultima actualizacion
+    #Activa o no
+    #Stock minimo
 
     class Meta:
         verbose_name = "Mercaderia"
@@ -55,3 +59,18 @@ class Mercaderia(models.Model):
     @models.permalink
     def get_delete_url(self):
         return 'mercaderias:borrar', [self.id]
+
+
+class MercaderiaProveedor(models.Model):
+    mercaderia = models.ForeignKey(Mercaderia)
+    proveedor = models.ForeignKey(Proveedor)
+    ultimo_precio = models.DecimalField(max_digits=15, decimal_places=2, blank=True)
+    #Ver de agregar precio de lista y precio de contado
+    #margen de ganancia FIXME
+
+    class Meta:
+        verbose_name = 'MercaderiaProveedor'
+        verbose_name_plural = "MercaderiasProveedores"
+
+    def __str__(self):
+        return "%s(%s)" % (self.mercaderia, self.proveedor)

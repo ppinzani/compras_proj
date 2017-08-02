@@ -10,12 +10,12 @@ urlpatterns = [
         ),
 
     url(regex=r'^nuevo/$',
-        view=views.mercaderias_cru,
+        view=views.mercaderias_create,
         name='nuevo'
         ),
 
     url(regex=r'^(?P<pk>[\w-]+)/editar/$',
-        view=views.mercaderias_cru,
+        view=views.mercaderias_edit,
         name='editar'
         ),
 
